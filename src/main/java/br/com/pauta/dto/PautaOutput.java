@@ -2,15 +2,15 @@ package br.com.pauta.dto;
 
 public class PautaOutput {
 
-	private Integer id;
+	private Integer idPauta;
 	private String tema;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdPauta() {
+		return idPauta;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdPauta(Integer idPauta) {
+		this.idPauta = idPauta;
 	}
 
 	public String getTema() {
@@ -20,4 +20,5 @@ public class PautaOutput {
 	public void setTema(String tema) {
 		this.tema = tema;
 	}
+
 }

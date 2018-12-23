@@ -1,7 +1,6 @@
 package br.com.pauta.entity;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,7 @@ public class Sessao {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idSessao;
 
 	@Column(updatable = false)
 	private LocalDateTime dataInicio;
@@ -33,14 +32,14 @@ public class Sessao {
 	private Integer idPauta;
 
 	@Transient
-	private Optional<Integer> tempoEmMinutos;
+	private Integer tempoEmMinutos;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdSessao() {
+		return idSessao;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdSessao(Integer idSessao) {
+		this.idSessao = idSessao;
 	}
 
 	public LocalDateTime getDataInicio() {
@@ -75,11 +74,11 @@ public class Sessao {
 		this.idPauta = idPauta;
 	}
 
-	public Optional<Integer> getTempoEmMinutos() {
+	public Integer getTempoEmMinutos() {
 		return tempoEmMinutos;
 	}
 
-	public void setTempoEmMinutos(Optional<Integer> tempoEmMinutos) {
+	public void setTempoEmMinutos(Integer tempoEmMinutos) {
 		this.tempoEmMinutos = tempoEmMinutos;
 	}
 

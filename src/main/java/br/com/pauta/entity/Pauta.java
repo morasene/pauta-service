@@ -13,18 +13,18 @@ public class Pauta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	@Id
-	private Integer id;
+	private Integer idPauta;
 
 	@NotBlank(message = "Tema é obrigatório")
 	@Column(unique = true)
 	private String tema;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdPauta() {
+		return idPauta;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdPauta(Integer idPauta) {
+		this.idPauta = idPauta;
 	}
 
 	public String getTema() {

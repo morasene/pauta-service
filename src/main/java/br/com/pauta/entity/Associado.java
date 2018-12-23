@@ -15,7 +15,7 @@ public class Associado {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idAssociado;
 
 	@NotBlank(message = "CPF é obrigatório")
 	@CPF(message = "CPF Inválido")
@@ -26,12 +26,12 @@ public class Associado {
 	@Column
 	private String nome;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdAssociado() {
+		return idAssociado;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdAssociado(Integer idAssociado) {
+		this.idAssociado = idAssociado;
 	}
 
 	public String getCpf() {

@@ -19,7 +19,7 @@ public class Voto {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idVoto;
 
 	@OneToOne
 	private Associado associado;
@@ -36,12 +36,12 @@ public class Voto {
 	@Enumerated(EnumType.STRING)
 	private VotoEnum voto;
 
-	public Integer getId() {
-		return id;
+	public Integer getIdVoto() {
+		return idVoto;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdVoto(Integer idVoto) {
+		this.idVoto = idVoto;
 	}
 
 	public Associado getAssociado() {

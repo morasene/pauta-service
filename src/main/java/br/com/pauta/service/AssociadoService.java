@@ -1,6 +1,7 @@
 package br.com.pauta.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class AssociadoService {
 
 	public Associado carregarAssociado(String cpf) {
 		return associadoRepository.findByCpf(cpf);
+	}
+
+	public Optional<Associado> carregarAssociado(Integer id) {
+		return associadoRepository.findById(id);
 	}
 
 	public List<Associado> listarAssociados() {

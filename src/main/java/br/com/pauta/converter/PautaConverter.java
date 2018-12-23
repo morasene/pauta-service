@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.pauta.config.exception.ResourceNotFoundException;
@@ -15,7 +16,8 @@ import br.com.pauta.entity.Pauta;
 @Component
 public class PautaConverter {
 
-	private ModelMapper conversor = new ModelMapper();
+	@Autowired
+	private ModelMapper conversor;
 
 	public List<PautaOutput> toArray(List<Pauta> listarPautas) {
 		return listarPautas.stream().map(entity -> conversor.map(entity, PautaOutput.class))

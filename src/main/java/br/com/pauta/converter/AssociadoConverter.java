@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.pauta.dto.AssociadoInput;
@@ -13,7 +14,8 @@ import br.com.pauta.entity.Associado;
 @Component
 public class AssociadoConverter {
 
-	private ModelMapper conversor = new ModelMapper();
+	@Autowired
+	private ModelMapper conversor;
 
 	public List<AssociadoOutput> toArray(List<Associado> listarAssociados) {
 		return listarAssociados.stream().map(entity -> conversor.map(entity, AssociadoOutput.class))
