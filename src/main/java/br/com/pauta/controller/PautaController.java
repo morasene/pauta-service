@@ -36,8 +36,8 @@ public class PautaController {
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos as pautas", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "Associados carregados com sucesso", response = AssociadoOutput.class, responseContainer = "List") })
-	public List<PautaOutput> listarTodosPautas() {
+			@ApiResponse(code = 200, message = "Pautas carregadas com sucesso", response = AssociadoOutput.class, responseContainer = "List") })
+	public List<PautaOutput> listarTodasPautas() {
 		return pautaConverter.toArray(pautaService.listarPautas());
 	}
 
