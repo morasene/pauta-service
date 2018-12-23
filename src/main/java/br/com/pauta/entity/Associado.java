@@ -50,4 +50,9 @@ public class Associado {
 		this.nome = nome;
 	}
 
+	@Override
+	public String toString() {
+		return "Associado [idAssociado=" + idAssociado + ", cpf=" + cpf + ", nome=" + nome + "]";
+	}
+
 }

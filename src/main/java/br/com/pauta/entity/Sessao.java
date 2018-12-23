@@ -99,4 +99,10 @@ public class Sessao {
 		dataInicio = LocalDateTime.now();
 	}
 
+	@Override
+	public String toString() {
+		return "Sessao [idSessao=" + idSessao + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", idPauta="
+				+ idPauta + ", tempoEmMinutos=" + tempoEmMinutos + "]";
+	}
+
 }

@@ -56,8 +56,8 @@ public class VotoService {
 		}
 	}
 
-	public Voto carregarVoto(Integer id) {
-		return votoRepository.findById(id).orElse(null);
+	public Optional<Voto> carregarVoto(Integer id) {
+		return votoRepository.findById(id);
 	}
 
 	public List<Voto> listarVotos() {
@@ -78,7 +78,7 @@ public class VotoService {
 
 	private void verificarValidadeDaSessao(LocalDateTime dataFim) throws Exception {
 		if (dataFim.isBefore(LocalDateTime.now())) {
-			throw new Exception("Sessão expirada.");
+			throw new BusinessException("Sessão expirada.");
 		}
 	}
 

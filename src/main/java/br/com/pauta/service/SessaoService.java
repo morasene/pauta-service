@@ -24,7 +24,7 @@ public class SessaoService {
 	@Autowired
 	private VotoService votoService;
 
-	private Integer TEMPO_EM_MINUTOS_PADRAO = 1;
+	private final Integer TEMPO_EM_MINUTOS_PADRAO = 1;
 
 	public Sessao cadastrarSessao(Sessao sessao) throws Exception {
 		sessao.setPauta(carregarPauta(sessao.getIdPauta()));
@@ -47,7 +47,7 @@ public class SessaoService {
 			sessao.setVotos(votoService.listarVotosPorSessao(idSessao));
 			return sessao;
 		} else {
-			throw new ResourceNotFoundException("Sessão não encontrada.");			
+			throw new ResourceNotFoundException("Sessão não encontrada.");
 		}
 	}
 	
