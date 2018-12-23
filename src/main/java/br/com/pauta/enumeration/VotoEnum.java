@@ -1,4 +1,4 @@
-package br.com.pauta;
+package br.com.pauta.enumeration;
 
 public enum VotoEnum {
 

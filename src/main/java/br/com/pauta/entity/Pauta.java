@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -18,6 +19,12 @@ public class Pauta {
 	@NotBlank(message = "Tema é obrigatório")
 	@Column(unique = true)
 	private String tema;
+
+	@Column
+	private Integer quantidadeVotosSim;
+
+	@Column
+	private Integer quantidadeVotosNao;
 
 	public Integer getIdPauta() {
 		return idPauta;
@@ -35,4 +42,25 @@ public class Pauta {
 		this.tema = tema;
 	}
 
+	public Integer getQuantidadeVotosSim() {
+		return quantidadeVotosSim;
+	}
+
+	public void setQuantidadeVotosSim(Integer quantidadeVotosSim) {
+		this.quantidadeVotosSim = quantidadeVotosSim;
+	}
+
+	public Integer getQuantidadeVotosNao() {
+		return quantidadeVotosNao;
+	}
+
+	public void setQuantidadeVotosNao(Integer quantidadeVotosNao) {
+		this.quantidadeVotosNao = quantidadeVotosNao;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		quantidadeVotosSim = 0;
+		quantidadeVotosNao = 0;
+	}
 }

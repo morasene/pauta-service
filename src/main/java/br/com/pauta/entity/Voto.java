@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
-import br.com.pauta.VotoEnum;
+import br.com.pauta.enumeration.VotoEnum;
 
 @Entity
 public class Voto {

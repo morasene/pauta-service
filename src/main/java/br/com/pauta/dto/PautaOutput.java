@@ -4,6 +4,8 @@ public class PautaOutput {
 
 	private Integer idPauta;
 	private String tema;
+	private Integer quantidadeVotosSim;
+	private Integer quantidadeVotosNao;
 
 	public Integer getIdPauta() {
 		return idPauta;
@@ -19,6 +21,22 @@ public class PautaOutput {
 
 	public void setTema(String tema) {
 		this.tema = tema;
+	}
+
+	public Integer getQuantidadeVotosSim() {
+		return quantidadeVotosSim;
+	}
+
+	public void setQuantidadeVotosSim(Integer quantidadeVotosSim) {
+		this.quantidadeVotosSim = quantidadeVotosSim;
+	}
+
+	public Integer getQuantidadeVotosNao() {
+		return quantidadeVotosNao;
+	}
+
+	public void setQuantidadeVotosNao(Integer quantidadeVotosNao) {
+		this.quantidadeVotosNao = quantidadeVotosNao;
 	}
 
 }

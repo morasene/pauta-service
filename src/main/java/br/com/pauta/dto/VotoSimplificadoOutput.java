@@ -2,9 +2,7 @@ package br.com.pauta.dto;
 
 public class VotoSimplificadoOutput {
 
-	private Integer idVoto;
-
-	private AssociadoOutput associado;
+	private AssociadoSimplificadoOutput associado;
 
 	private String voto;
 
@@ -16,19 +14,11 @@ public class VotoSimplificadoOutput {
 		this.voto = voto;
 	}
 
-	public Integer getIdVoto() {
-		return idVoto;
-	}
-
-	public void setIdVoto(Integer idVoto) {
-		this.idVoto = idVoto;
-	}
-
-	public AssociadoOutput getAssociado() {
+	public AssociadoSimplificadoOutput getAssociado() {
 		return associado;
 	}
 
-	public void setAssociado(AssociadoOutput associado) {
+	public void setAssociado(AssociadoSimplificadoOutput associado) {
 		this.associado = associado;
 	}
 

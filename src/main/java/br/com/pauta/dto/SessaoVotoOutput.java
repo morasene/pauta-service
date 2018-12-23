@@ -4,15 +4,15 @@ import java.util.List;
 
 public class SessaoVotoOutput {
 
-	private SessaoOutput sessao;
+	private SessaoSimplificadaOutput sessao;
 
 	private List<VotoSimplificadoOutput> votos;
 
-	public SessaoOutput getSessao() {
+	public SessaoSimplificadaOutput getSessao() {
 		return sessao;
 	}
 
-	public void setSessao(SessaoOutput sessao) {
+	public void setSessao(SessaoSimplificadaOutput sessao) {
 		this.sessao = sessao;
 	}
 

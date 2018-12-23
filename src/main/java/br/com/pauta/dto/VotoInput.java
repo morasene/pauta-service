@@ -1,6 +1,6 @@
 package br.com.pauta.dto;
 
-import br.com.pauta.VotoEnum;
+import br.com.pauta.enumeration.VotoEnum;
 
 public class VotoInput {
 

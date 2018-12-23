@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import br.com.pauta.config.exception.ResourceNotFoundException;
 import br.com.pauta.dto.PautaInput;
 import br.com.pauta.dto.PautaOutput;
+import br.com.pauta.dto.PautaSimplificadaOutput;
 import br.com.pauta.entity.Pauta;
 
 @Component
@@ -29,10 +30,14 @@ public class PautaConverter {
 	}
 
 	public PautaOutput toOutput(Optional<Pauta> pauta) {
-		if (pauta.isPresent()) {			
+		if (pauta.isPresent()) {
 			return conversor.map(pauta.get(), PautaOutput.class);
 		}
 		throw new ResourceNotFoundException("Pauta referente ao identificador informado não existe.");
+	}
+
+	public PautaSimplificadaOutput toSimplificadaOutput(Pauta pauta) {
+		return conversor.map(pauta, PautaSimplificadaOutput.class);
 	}
 
 	public PautaOutput toOutput(Pauta pauta) {
