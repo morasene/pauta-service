@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.pauta.config.exception.ResourceNotFoundException;
 import br.com.pauta.entity.Pauta;
 import br.com.pauta.entity.Sessao;
+import br.com.pauta.exception.ResourceNotFoundException;
 import br.com.pauta.repository.SessaoRepository;
 
 @Service

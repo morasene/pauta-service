@@ -1,4 +1,4 @@
-package br.com.pauta.config.exception;
+package br.com.pauta.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.pauta.config.exception.ResourceNotFoundException;
 import br.com.pauta.dto.PautaInput;
 import br.com.pauta.dto.PautaOutput;
 import br.com.pauta.dto.PautaSimplificadaOutput;
 import br.com.pauta.entity.Pauta;
+import br.com.pauta.exception.ResourceNotFoundException;
 
 @Component
 public class PautaConverter {

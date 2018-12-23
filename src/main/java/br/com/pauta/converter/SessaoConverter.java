@@ -11,12 +11,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.pauta.config.exception.ResourceNotFoundException;
 import br.com.pauta.dto.SessaoInput;
 import br.com.pauta.dto.SessaoOutput;
 import br.com.pauta.dto.SessaoSimplificadaOutput;
 import br.com.pauta.dto.SessaoVotoOutput;
 import br.com.pauta.entity.Sessao;
+import br.com.pauta.exception.ResourceNotFoundException;
 
 @Component
 public class SessaoConverter {

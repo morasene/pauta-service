@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.pauta.config.exception.ResourceNotFoundException;
 import br.com.pauta.dto.VotoInput;
 import br.com.pauta.dto.VotoOutput;
 import br.com.pauta.dto.VotoSimplificadoOutput;
 import br.com.pauta.entity.Voto;
+import br.com.pauta.exception.ResourceNotFoundException;
 
 @Component
 public class VotoConverter {
