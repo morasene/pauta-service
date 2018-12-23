@@ -53,5 +53,4 @@ public class SessaoOutput {
 	public void setDuracaoEmMinutos(Long duracaoEmMinutos) {
 		this.duracaoEmMinutos = duracaoEmMinutos;
 	}
-
 }

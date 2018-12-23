@@ -45,8 +45,8 @@ public class PautaController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Pauta carregado com sucesso", response = AssociadoOutput.class),
 			@ApiResponse(code = 404, message = "Pauta referente ao identificador informado não existe")
 	})
-	@GetMapping("/{id}")
-	public PautaOutput carregarPauta(@ApiParam(value = "Inteiro", name = "identificador", required = true) @PathVariable("id") Integer id) {
+	@GetMapping(value = "/{id}")
+	public PautaOutput carregarPauta(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
 		return pautaConverter.toOutput(pautaService.carregarPauta(id));
 	}
 

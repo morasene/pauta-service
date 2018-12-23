@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.pauta.converter.SessaoConverter;
 import br.com.pauta.dto.SessaoInput;
 import br.com.pauta.dto.SessaoOutput;
+import br.com.pauta.dto.SessaoVotoOutput;
 import br.com.pauta.service.SessaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +32,7 @@ public class SessaoController {
 
 	@Autowired
 	private SessaoConverter sessaoConverter;
-
+	
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos as sessões", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({
@@ -45,8 +46,16 @@ public class SessaoController {
 			@ApiResponse(code = 404, message = "Sessão referente ao identificador informado não existe")
 	})
 	@GetMapping("/{id}")
-	public SessaoOutput carregarSessao(@ApiParam(value = "Inteiro", name = "identificador", required = true) @PathVariable("id") Integer id) {
+	public SessaoOutput carregarSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
 		return sessaoConverter.toOutput(sessaoService.carregarSessao(id));
+	}
+
+	@GetMapping("/{id}/votos")
+	@ApiOperation(value = "Carregar todos os votos de uma Sessão", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = SessaoOutput.class, responseContainer = "List") })
+	public SessaoVotoOutput listarTodasVotosDeUmaSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
+		return sessaoConverter.toSessaoOutput(sessaoService.listarVotosDaSessao(id));
 	}
 
 	@ApiOperation(value = "Cadastrar nova sessao", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

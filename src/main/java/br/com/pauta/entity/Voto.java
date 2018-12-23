@@ -24,11 +24,11 @@ public class Voto {
 	@OneToOne
 	private Associado associado;
 
-	@Transient
-	private Integer idAssociado;
-
 	@ManyToOne
 	private Sessao sessao;
+
+	@Transient
+	private Integer idAssociado;
 
 	@Transient
 	private Integer idSessao;
@@ -82,6 +82,49 @@ public class Voto {
 
 	public void setIdSessao(Integer idSessao) {
 		this.idSessao = idSessao;
+	}
+
+	@Override
+	public String toString() {
+		return "Voto [idVoto=" + idVoto + ", associado=" + associado + ", idAssociado=" + idAssociado + ", idSessao="
+				+ idSessao + ", voto=" + voto + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idAssociado == null) ? 0 : idAssociado.hashCode());
+		result = prime * result + ((idSessao == null) ? 0 : idSessao.hashCode());
+		result = prime * result + ((idVoto == null) ? 0 : idVoto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Voto other = (Voto) obj;
+		if (idAssociado == null) {
+			if (other.idAssociado != null)
+				return false;
+		} else if (!idAssociado.equals(other.idAssociado))
+			return false;
+		if (idSessao == null) {
+			if (other.idSessao != null)
+				return false;
+		} else if (!idSessao.equals(other.idSessao))
+			return false;
+		if (idVoto == null) {
+			if (other.idVoto != null)
+				return false;
+		} else if (!idVoto.equals(other.idVoto))
+			return false;
+		return true;
 	}
 
 }

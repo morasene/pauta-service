@@ -1,6 +1,7 @@
 package br.com.pauta.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Sessao {
 	@Column(updatable = false)
 	private LocalDateTime dataInicio;
 
-	@Column
+	@Column(updatable = false)
 	private LocalDateTime dataFim;
 
 	@OneToOne
@@ -33,6 +34,9 @@ public class Sessao {
 
 	@Transient
 	private Integer tempoEmMinutos;
+
+	@Transient
+	private List<Voto> votos;
 
 	public Integer getIdSessao() {
 		return idSessao;
@@ -82,8 +86,17 @@ public class Sessao {
 		this.tempoEmMinutos = tempoEmMinutos;
 	}
 
+	public List<Voto> getVotos() {
+		return votos;
+	}
+
+	public void setVotos(List<Voto> votos) {
+		this.votos = votos;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		dataInicio = LocalDateTime.now();
 	}
+
 }

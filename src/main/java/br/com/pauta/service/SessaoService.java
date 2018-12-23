@@ -20,7 +20,10 @@ public class SessaoService {
 
 	@Autowired
 	private PautaService pautaService;
-	
+
+	@Autowired
+	private VotoService votoService;
+
 	private Integer TEMPO_EM_MINUTOS_PADRAO = 1;
 
 	public Sessao cadastrarSessao(Sessao sessao) throws Exception {
@@ -36,10 +39,21 @@ public class SessaoService {
 	public List<Sessao> listarSessoes() {
 		return sessaoRepository.findAll();
 	}
+
+	public Sessao listarVotosDaSessao(Integer idSessao) {
+		Optional<Sessao> sessaoOptional = carregarSessao(idSessao);
+		if (sessaoOptional.isPresent()) {
+			Sessao sessao = sessaoOptional.get();
+			sessao.setVotos(votoService.listarVotosPorSessao(idSessao));
+			return sessao;
+		} else {
+			throw new ResourceNotFoundException("Sessão não encontrada.");			
+		}
+	}
 	
-	private LocalDateTime calcularDataFinal(Integer tempoEmMinutos) {
-		Integer tempo = Optional.ofNullable(tempoEmMinutos).orElse(TEMPO_EM_MINUTOS_PADRAO);
-		return LocalDateTime.now().plusMinutes(tempo);
+	private LocalDateTime calcularDataFinal(Integer tempoEmMinutosInformado) {
+		Integer tempoEmMinutos = Optional.ofNullable(tempoEmMinutosInformado).orElse(TEMPO_EM_MINUTOS_PADRAO);
+		return LocalDateTime.now().plusMinutes(tempoEmMinutos);
 	}
 	
 	private Pauta carregarPauta(Integer idPauta) {
