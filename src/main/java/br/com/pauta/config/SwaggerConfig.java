@@ -25,7 +25,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Swagger Api").description("Documentação da api de Controle de Pautas")
+		return new ApiInfoBuilder().title("Controle de Pautas").description("Documentação da api de Controle de Pautas")
 				.version("1.0").build();
 	}
 }

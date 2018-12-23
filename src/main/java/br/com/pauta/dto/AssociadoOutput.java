@@ -2,8 +2,17 @@ package br.com.pauta.dto;
 
 public class AssociadoOutput {
 
+	private Integer id;
 	private String cpf;
 	private String nome;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getCpf() {
 		return cpf;
