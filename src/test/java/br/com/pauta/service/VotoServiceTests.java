@@ -1,7 +1,6 @@
 package br.com.pauta.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -15,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.pauta.entity.Associado;
@@ -25,7 +23,6 @@ import br.com.pauta.entity.Voto;
 import br.com.pauta.enumeration.VotoEnum;
 import br.com.pauta.exception.BusinessException;
 import br.com.pauta.exception.ResourceNotFoundException;
-import br.com.pauta.repository.SessaoRepository;
 import br.com.pauta.repository.VotoRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -50,7 +47,6 @@ public class VotoServiceTests {
 
 	private final Integer idVoto = 1;
 	private final Integer idSessao = 1;
-	private final Integer idPauta = 1;
 	private final Integer idAssociado = 1;
 
 	@Test
@@ -73,16 +69,6 @@ public class VotoServiceTests {
 		List<Voto> listarVotos = votoService.listarVotos();
 		assertTrue(listarVotos.size() == 0);
 	}
-	
-	/*
-	 	verificarSeAssociadoJaVotou(voto);
-		voto.setAssociado(carregarAssociado(voto.getIdAssociado()));
-		Sessao sessao = carregarObjetoSessaoParaVoto(voto.getIdSessao());
-		verificarValidadeDaSessao(sessao.getDataFim());
-		atualizarQuantidadeDeVotosNaPauta(sessao.getPauta(), voto.getVoto());
-		voto.setSessao(sessao);
-
-	 */
 	
 	@Test
 	public void validarCadastrarVotoAssociadoJaVotou() throws Exception {
