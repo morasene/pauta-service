@@ -47,3 +47,10 @@ Para execução via linha de comando pegar o jar que se encontra dentro da pasta
 ```bash
 java -jar pauta-service-1.0.0.jar
 ```
+
+### Documentação do Projeto
+A documentação do projeto encontra-se em:
+
+```bash
+http://localhost:8080/swagger-ui.html#/
+```
