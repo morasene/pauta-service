@@ -1,21 +1,21 @@
 # pauta-service
 Projeto de Controle de Pautas
 
-###Instalação Banco de Dados
+### Instalação Banco de Dados
 Para execução deste projeto foi utilizado um banco de dados mysql. 
 
 Você pode encontrar o instalador nestes links:
 - https://www.mysql.com/downloads/
 - http://www.wampserver.com/en/
 
-###Criação do database
+### Criação do database
 Para o melhor andamento do projeto será necessário criar o banco de dados.
 
 ```bash
 create database pauta;
 ```
 
-###Criação das tabelas
+### Criação das tabelas
 Com o banco de dados criado, executar os comandos abaixo:
 
 ```bash
@@ -30,13 +30,13 @@ alter table voto add constraint FKbnsat9gmsynnxwopvwnul3akc foreign key (associa
 alter table voto add constraint FKe70bal6mhwmudln105u1f27gs foreign key (sessao_id_sessao) references sessao (id_sessao);
 ```	
 
-###Clean  Code
+### Clean  Code
 Neste projeto tentei utilizar ao máximo as premissas do Clean Code pois acredito que projeto fica mais claro e organizado utilizando as técnicas descritas.
 
-###Mockito
+### Mockito
 Para os testes unitários foi utilizado o framework mockito, visto a minha familiaridade com  o mesmo.
 
-###Execução do Projeto
+### Execução do Projeto
 Para executar o projeto basta compilar o mesmo utilizando o comando abaixo. Será necessário ter o maven instalado na maquina ou abrir o projeto no eclipse e rodar o comando.
 ```bash
 mvn clean install
