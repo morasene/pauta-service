@@ -53,7 +53,7 @@ public class SessaoController {
 	@GetMapping("/{id}/votos")
 	@ApiOperation(value = "Carregar todos os votos de uma Sessão", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = SessaoOutput.class, responseContainer = "List") })
+			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = SessaoVotoOutput.class, responseContainer = "List") })
 	public SessaoVotoOutput listarTodasVotosDeUmaSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
 		return sessaoConverter.toSessaoOutput(sessaoService.listarVotosDaSessao(id));
 	}

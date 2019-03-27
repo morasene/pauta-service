@@ -31,7 +31,7 @@ alter table voto add constraint FKe70bal6mhwmudln105u1f27gs foreign key (sessao_
 ```	
 
 ### Clean  Code
-Neste projeto tentei utilizar ao máximo as premissas do Clean Code pois acredito que projeto fica mais claro e organizado utilizando as técnicas descritas.
+Neste projeto tentei utilizar ao máximo as premissas do Clean Code pois acredito que o projeto fica mais claro e organizado utilizando as técnicas descritas.
 
 ### Mockito
 Para os testes unitários foi utilizado o framework mockito, visto a minha familiaridade com  o mesmo.

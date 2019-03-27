@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pauta.converter.PautaConverter;
-import br.com.pauta.dto.AssociadoOutput;
 import br.com.pauta.dto.PautaInput;
 import br.com.pauta.dto.PautaOutput;
 import br.com.pauta.service.PautaService;
@@ -36,13 +35,13 @@ public class PautaController {
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos as pautas", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "Pautas carregadas com sucesso", response = AssociadoOutput.class, responseContainer = "List") })
+			@ApiResponse(code = 200, message = "Pautas carregadas com sucesso", response = PautaOutput.class, responseContainer = "List") })
 	public List<PautaOutput> listarTodasPautas() {
 		return pautaConverter.toArray(pautaService.listarPautas());
 	}
 
 	@ApiOperation(value = "Carregar uma pauta baseado no identificador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses({ @ApiResponse(code = 200, message = "Pauta carregado com sucesso", response = AssociadoOutput.class),
+	@ApiResponses({ @ApiResponse(code = 200, message = "Pauta carregado com sucesso", response = PautaOutput.class),
 			@ApiResponse(code = 404, message = "Pauta referente ao identificador informado não existe")
 	})
 	@GetMapping(value = "/{id}")
@@ -52,7 +51,7 @@ public class PautaController {
 
 	@ApiOperation(value = "Cadastrar nova pauta", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "Nova pauta criada", response = AssociadoOutput.class)
+		@ApiResponse(code = 200, message = "Nova pauta criada", response = PautaOutput.class)
 	})
 	@PostMapping("/")
 	public PautaOutput cadastrarAssociado(

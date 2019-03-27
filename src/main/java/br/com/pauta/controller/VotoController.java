@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pauta.converter.VotoConverter;
-import br.com.pauta.dto.SessaoOutput;
 import br.com.pauta.dto.VotoInput;
 import br.com.pauta.dto.VotoOutput;
 import br.com.pauta.service.VotoService;
@@ -36,13 +35,13 @@ public class VotoController {
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos os votos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({
-			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = SessaoOutput.class, responseContainer = "List") })
+			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = VotoOutput.class, responseContainer = "List") })
 	public List<VotoOutput> listarTodosVotos() {
 		return votoConverter.arrayEntitytoArrayDTOOutput(votoService.listarVotos());
 	}
 
 	@ApiOperation(value = "Carregar um voto baseada no identificador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses({ @ApiResponse(code = 200, message = "Voto carregado com sucesso", response = SessaoOutput.class),
+	@ApiResponses({ @ApiResponse(code = 200, message = "Voto carregado com sucesso", response = VotoOutput.class),
 			@ApiResponse(code = 404, message = "Voto referente ao identificador informado não existe") })
 	@GetMapping("/{id}")
 	public VotoOutput carregarVoto(
@@ -51,7 +50,7 @@ public class VotoController {
 	}
 
 	@ApiOperation(value = "Cadastrar novo voto", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses({ @ApiResponse(code = 200, message = "Novo voto criado", response = SessaoOutput.class) })
+	@ApiResponses({ @ApiResponse(code = 200, message = "Novo voto criado", response = VotoOutput.class) })
 	@PostMapping("/")
 	public VotoOutput cadastrarVoto(
 			@ApiParam(value = "VotoInput", name = "votoInput", required = true) @RequestBody VotoInput votoInput)
