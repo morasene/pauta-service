@@ -15,6 +15,7 @@ Para o melhor andamento do projeto será necessário criar o banco de dados.
 create database pauta;
 ```
 
+
 ### Criação das tabelas
 Com o banco de dados criado, executar os comandos abaixo:
 
