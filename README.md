@@ -2,7 +2,7 @@
 Projeto de Controle de Pautas
 
 ### Instalação Banco de Dados
-Para execução deste projeto foi utilizado um banco de dados mysql. 
+Para execução deste projeto foi utilizado o banco de dados mysql. 
 
 Você pode encontrar o instalador nestes links:
 - https://www.mysql.com/downloads/
