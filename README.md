@@ -11,6 +11,8 @@ Você pode encontrar o instalador nestes links:
 ### Criação do database
 Para o melhor andamento do projeto será necessário criar o banco de dados.
 
+teste
+
 ```bash
 create database pauta;
 ```
