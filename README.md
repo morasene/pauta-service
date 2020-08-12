@@ -1,6 +1,8 @@
 # pauta-service
 Projeto de Controle de Pautas
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=morasene_pauta-service&metric=alert_status)](https://sonarcloud.io/dashboard?id=morasene_pauta-service)
+
 ### Instalação Banco de Dados
 Para execução deste projeto foi utilizado o banco de dados mysql. 
 
