@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
 	@Bean
-	public ModelMapper conversor() {
-		return new ModelMapper();
+	public ModelMapper defaultModelMapper() {
+		ModelMapper modelmapper = new ModelMapper();
+		modelmapper.getConfiguration().setAmbiguityIgnored(true);
+		return modelmapper;
 	}
 }

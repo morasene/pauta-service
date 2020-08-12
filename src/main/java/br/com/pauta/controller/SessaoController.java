@@ -2,7 +2,6 @@ package br.com.pauta.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,24 +26,25 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("sessao")
 public class SessaoController {
 
-	@Autowired
-	private SessaoService sessaoService;
+	private final SessaoService sessaoService;
+	private final SessaoConverter sessaoConverter;
 
-	@Autowired
-	private SessaoConverter sessaoConverter;
-	
+	private SessaoController(SessaoService sessaoService, SessaoConverter sessaoConverter) {
+		super();
+		this.sessaoService = sessaoService;
+		this.sessaoConverter = sessaoConverter;
+	}
+
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos as sessões", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses({
-			@ApiResponse(code = 200, message = "Sessões carregadas com sucesso", response = SessaoOutput.class, responseContainer = "List") })
+	@ApiResponses({ @ApiResponse(code = 200, message = "Sessões carregadas com sucesso", response = SessaoOutput.class, responseContainer = "List") })
 	public List<SessaoOutput> listarTodasSessoes() {
 		return sessaoConverter.toArray(sessaoService.listarSessoes());
 	}
 
 	@ApiOperation(value = "Carregar uma sessão baseada no identificador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({ @ApiResponse(code = 200, message = "Sessão carregado com sucesso", response = SessaoOutput.class),
-			@ApiResponse(code = 404, message = "Sessão referente ao identificador informado não existe")
-	})
+			@ApiResponse(code = 404, message = "Sessão referente ao identificador informado não existe") })
 	@GetMapping("/{id}")
 	public SessaoOutput carregarSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
 		return sessaoConverter.toOutput(sessaoService.carregarSessao(id));
@@ -59,12 +59,10 @@ public class SessaoController {
 	}
 
 	@ApiOperation(value = "Cadastrar nova sessao", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "Nova sessão criada", response = SessaoOutput.class)
-	})
+	@ApiResponses({ @ApiResponse(code = 200, message = "Nova sessão criada", response = SessaoOutput.class) })
 	@PostMapping("/")
-	public SessaoOutput cadastrarSessao(
-			@ApiParam(value = "SessaoInput", name = "sessaoInput", required = true) @RequestBody SessaoInput sessaoInput) throws Exception {
+	public SessaoOutput cadastrarSessao(@ApiParam(value = "SessaoInput", name = "sessaoInput", required = true) @RequestBody SessaoInput sessaoInput)
+			throws Exception {
 		return sessaoConverter.toOutput(sessaoService.cadastrarSessao(sessaoConverter.toEntity(sessaoInput)));
 	}
 }

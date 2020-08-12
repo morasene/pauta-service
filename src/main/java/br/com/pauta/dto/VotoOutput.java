@@ -3,11 +3,8 @@ package br.com.pauta.dto;
 public class VotoOutput {
 
 	private Integer idVoto;
-
 	private SessaoOutput sessao;
-
 	private AssociadoOutput associado;
-
 	private String voto;
 
 	public String getVoto() {

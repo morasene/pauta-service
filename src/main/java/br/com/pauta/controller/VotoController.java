@@ -2,7 +2,6 @@ package br.com.pauta.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +25,14 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("voto")
 public class VotoController {
 
-	@Autowired
-	private VotoService votoService;
+	private final VotoService votoService;
+	private final VotoConverter votoConverter;
 
-	@Autowired
-	private VotoConverter votoConverter;
+	private VotoController(VotoService votoService, VotoConverter votoConverter) {
+		super();
+		this.votoService = votoService;
+		this.votoConverter = votoConverter;
+	}
 
 	@GetMapping("/")
 	@ApiOperation(value = "Carregar todos os votos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

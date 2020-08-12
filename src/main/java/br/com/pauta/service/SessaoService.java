@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pauta.entity.Pauta;
@@ -15,16 +14,18 @@ import br.com.pauta.repository.SessaoRepository;
 @Service
 public class SessaoService {
 
-	@Autowired
-	private SessaoRepository sessaoRepository;
-
-	@Autowired
-	private PautaService pautaService;
-
-	@Autowired
-	private VotoService votoService;
-
 	private final Integer TEMPO_EM_MINUTOS_PADRAO = 1;
+
+	private final SessaoRepository sessaoRepository;
+	private final PautaService pautaService;
+	private final VotoService votoService;
+
+	private SessaoService(SessaoRepository sessaoRepository, PautaService pautaService, VotoService votoService) {
+		super();
+		this.sessaoRepository = sessaoRepository;
+		this.pautaService = pautaService;
+		this.votoService = votoService;
+	}
 
 	public Sessao cadastrarSessao(Sessao sessao) throws Exception {
 		sessao.setPauta(carregarPauta(sessao.getIdPauta()));
@@ -32,8 +33,8 @@ public class SessaoService {
 		return sessaoRepository.save(sessao);
 	}
 
-	public Optional<Sessao> carregarSessao(Integer id) {
-		return sessaoRepository.findById(id);
+	public Sessao carregarSessao(Integer id) {
+		return sessaoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sessão não encontrada."));
 	}
 
 	public List<Sessao> listarSessoes() {
@@ -41,27 +42,20 @@ public class SessaoService {
 	}
 
 	public Sessao listarVotosDaSessao(Integer idSessao) {
-		Optional<Sessao> sessaoOptional = carregarSessao(idSessao);
-		if (sessaoOptional.isPresent()) {
-			Sessao sessao = sessaoOptional.get();
-			sessao.setVotos(votoService.listarVotosPorSessao(idSessao));
-			return sessao;
-		} else {
-			throw new ResourceNotFoundException("Sessão não encontrada.");
-		}
-	}
-	
-	private LocalDateTime calcularDataFinal(Integer tempoEmMinutosInformado) {
-		Integer tempoEmMinutos = Optional.ofNullable(tempoEmMinutosInformado).orElse(TEMPO_EM_MINUTOS_PADRAO);
-		return LocalDateTime.now().plusMinutes(tempoEmMinutos);
-	}
-	
-	private Pauta carregarPauta(Integer idPauta) {
-		Optional<Pauta> pauta = pautaService.carregarPauta(idPauta);
-		if (!pauta.isPresent()) {
-			throw new ResourceNotFoundException("Pauta não encontrada.");
-		}
-		return pauta.get();
+		Sessao sessao = carregarSessao(idSessao);
+		sessao.setVotos(votoService.listarVotosPorSessao(idSessao));
+		return sessao;
 	}
 
+	private LocalDateTime calcularDataFinal(Integer tempoEmMinutosInformado) {
+		return LocalDateTime.now().plusMinutes(tempoEmMinutos(tempoEmMinutosInformado));
+	}
+
+	private Integer tempoEmMinutos(Integer tempoEmMinutosInformado) {
+		return Optional.ofNullable(tempoEmMinutosInformado).orElse(TEMPO_EM_MINUTOS_PADRAO);
+	}
+
+	private Pauta carregarPauta(Integer idPauta) {
+		return pautaService.carregarPauta(idPauta);
+	}
 }

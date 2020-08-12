@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pauta.entity.Associado;
@@ -13,20 +12,21 @@ import br.com.pauta.entity.Sessao;
 import br.com.pauta.entity.Voto;
 import br.com.pauta.enumeration.VotoEnum;
 import br.com.pauta.exception.BusinessException;
-import br.com.pauta.exception.ResourceNotFoundException;
 import br.com.pauta.repository.VotoRepository;
 
 @Service
 public class VotoService {
 
-	@Autowired
-	private VotoRepository votoRepository;
+	private final VotoRepository votoRepository;
+	private final AssociadoService associadoService;
+	private final SessaoService sessaoService;
 
-	@Autowired
-	private AssociadoService associadoService;
-
-	@Autowired
-	private SessaoService sessaoService;
+	private VotoService(VotoRepository votoRepository, AssociadoService associadoService, SessaoService sessaoService) {
+		super();
+		this.votoRepository = votoRepository;
+		this.associadoService = associadoService;
+		this.sessaoService = sessaoService;
+	}
 
 	public Voto cadastrarVoto(Voto voto) throws Exception {
 		verificarSeAssociadoJaVotou(voto);
@@ -40,9 +40,8 @@ public class VotoService {
 
 	private void verificarSeAssociadoJaVotou(Voto votoNovo) throws Exception {
 		List<Voto> listarVotosPorSessao = listarVotosPorSessao(votoNovo.getIdSessao());
-		if (listarVotosPorSessao != null) {
-			Optional<Voto> associadoVotou = listarVotosPorSessao.stream().filter(voto -> votoNovo.getIdAssociado() == voto.getAssociado().getIdAssociado()).findFirst();
-			if (associadoVotou.isPresent()) {
+		if (!listarVotosPorSessao.isEmpty()) {
+			if (listarVotosPorSessao.stream().anyMatch(voto -> votoNovo.getIdAssociado() == voto.getAssociado().getIdAssociado())) {
 				throw new BusinessException("Associado ja efetuou o voto para esta pauta.");
 			}
 		}
@@ -52,7 +51,7 @@ public class VotoService {
 		if (VotoEnum.SIM.equals(voto)) {
 			pauta.setQuantidadeVotosSim(pauta.getQuantidadeVotosSim() + 1);
 		} else {
-			pauta.setQuantidadeVotosNao(pauta.getQuantidadeVotosNao() + 1);			
+			pauta.setQuantidadeVotosNao(pauta.getQuantidadeVotosNao() + 1);
 		}
 	}
 
@@ -69,11 +68,7 @@ public class VotoService {
 	}
 
 	private Sessao carregarObjetoSessaoParaVoto(Integer idSessao) throws Exception {
-		Optional<Sessao> sessaoOptional = sessaoService.carregarSessao(idSessao);
-		if (!sessaoOptional.isPresent()) {
-			throw new ResourceNotFoundException("Sessão não encontrada.");
-		}
-		return sessaoOptional.get();
+		return sessaoService.carregarSessao(idSessao);
 	}
 
 	private void verificarValidadeDaSessao(LocalDateTime dataFim) throws Exception {
@@ -83,10 +78,6 @@ public class VotoService {
 	}
 
 	private Associado carregarAssociado(Integer idAssociado) {
-		Optional<Associado> associado = associadoService.carregarAssociado(idAssociado);
-		if (!associado.isPresent()) {
-			throw new ResourceNotFoundException("Associado não encontrado.");
-		}
-		return associado.get();
+		return associadoService.carregarAssociado(idAssociado);
 	}
 }

@@ -1,30 +1,37 @@
 package br.com.pauta.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.pauta.entity.Associado;
+import br.com.pauta.exception.ResourceNotFoundException;
 import br.com.pauta.repository.AssociadoRepository;
 
 @Service
 public class AssociadoService {
 
-	@Autowired
 	private AssociadoRepository associadoRepository;
+
+	private AssociadoService(AssociadoRepository associadoRepository) {
+		super();
+		this.associadoRepository = associadoRepository;
+	}
 
 	public Associado cadastrarAssociado(Associado associado) {
 		return associadoRepository.save(associado);
 	}
 
 	public Associado carregarAssociado(String cpf) {
-		return associadoRepository.findByCpf(cpf);
+		return associadoRepository.findByCpf(cpf).orElseThrow(() -> createExceptionResourceNotFound());
 	}
 
-	public Optional<Associado> carregarAssociado(Integer id) {
-		return associadoRepository.findById(id);
+	private ResourceNotFoundException createExceptionResourceNotFound() {
+		return new ResourceNotFoundException("Associado não encontrado.");
+	}
+
+	public Associado carregarAssociado(Integer id) {
+		return associadoRepository.findById(id).orElseThrow(() -> createExceptionResourceNotFound());
 	}
 
 	public List<Associado> listarAssociados() {
