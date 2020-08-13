@@ -14,7 +14,7 @@ import br.com.pauta.converter.SessaoConverter;
 import br.com.pauta.dto.SessaoInput;
 import br.com.pauta.dto.SessaoOutput;
 import br.com.pauta.dto.SessaoVotoOutput;
-import br.com.pauta.service.SessaoService;
+import br.com.pauta.service.SessaoBusiness;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -23,15 +23,15 @@ import io.swagger.annotations.ApiResponses;
 
 @Api
 @RestController
-@RequestMapping("sessao")
+@RequestMapping("sessao/v1")
 public class SessaoController {
 
-	private final SessaoService sessaoService;
+	private final SessaoBusiness sessaoBusiness;
 	private final SessaoConverter sessaoConverter;
 
-	private SessaoController(SessaoService sessaoService, SessaoConverter sessaoConverter) {
+	private SessaoController(SessaoBusiness sessaoBusiness, SessaoConverter sessaoConverter) {
 		super();
-		this.sessaoService = sessaoService;
+		this.sessaoBusiness = sessaoBusiness;
 		this.sessaoConverter = sessaoConverter;
 	}
 
@@ -39,7 +39,7 @@ public class SessaoController {
 	@ApiOperation(value = "Carregar todos as sessões", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses({ @ApiResponse(code = 200, message = "Sessões carregadas com sucesso", response = SessaoOutput.class, responseContainer = "List") })
 	public List<SessaoOutput> listarTodasSessoes() {
-		return sessaoConverter.toArray(sessaoService.listarSessoes());
+		return sessaoConverter.toArray(sessaoBusiness.listarSessoes());
 	}
 
 	@ApiOperation(value = "Carregar uma sessão baseada no identificador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,7 +47,7 @@ public class SessaoController {
 			@ApiResponse(code = 404, message = "Sessão referente ao identificador informado não existe") })
 	@GetMapping("/{id}")
 	public SessaoOutput carregarSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
-		return sessaoConverter.toOutput(sessaoService.carregarSessao(id));
+		return sessaoConverter.toOutput(sessaoBusiness.carregarSessao(id));
 	}
 
 	@GetMapping("/{id}/votos")
@@ -55,7 +55,7 @@ public class SessaoController {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = SessaoVotoOutput.class, responseContainer = "List") })
 	public SessaoVotoOutput listarTodasVotosDeUmaSessao(@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
-		return sessaoConverter.toSessaoOutput(sessaoService.listarVotosDaSessao(id));
+		return sessaoConverter.toSessaoOutput(sessaoBusiness.listarVotosDaSessao(id));
 	}
 
 	@ApiOperation(value = "Cadastrar nova sessao", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -63,6 +63,6 @@ public class SessaoController {
 	@PostMapping("/")
 	public SessaoOutput cadastrarSessao(@ApiParam(value = "SessaoInput", name = "sessaoInput", required = true) @RequestBody SessaoInput sessaoInput)
 			throws Exception {
-		return sessaoConverter.toOutput(sessaoService.cadastrarSessao(sessaoConverter.toEntity(sessaoInput)));
+		return sessaoConverter.toOutput(sessaoBusiness.cadastrarSessao(sessaoConverter.toEntity(sessaoInput)));
 	}
 }

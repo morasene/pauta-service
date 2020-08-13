@@ -23,15 +23,15 @@ public class AssociadoService {
 	}
 
 	public Associado carregarAssociado(String cpf) {
-		return associadoRepository.findByCpf(cpf).orElseThrow(() -> createExceptionResourceNotFound());
+		return associadoRepository.findByCpf(cpf).orElseThrow(() -> criarExcecaoResourceNotFound());
 	}
 
-	private ResourceNotFoundException createExceptionResourceNotFound() {
+	private ResourceNotFoundException criarExcecaoResourceNotFound() {
 		return new ResourceNotFoundException("Associado não encontrado.");
 	}
 
 	public Associado carregarAssociado(Integer id) {
-		return associadoRepository.findById(id).orElseThrow(() -> createExceptionResourceNotFound());
+		return associadoRepository.findById(id).orElseThrow(() -> criarExcecaoResourceNotFound());
 	}
 
 	public List<Associado> listarAssociados() {

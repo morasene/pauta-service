@@ -1,3 +1,4 @@
+
 package br.com.pauta.controller;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.pauta.converter.VotoConverter;
 import br.com.pauta.dto.VotoInput;
 import br.com.pauta.dto.VotoOutput;
-import br.com.pauta.service.VotoService;
+import br.com.pauta.service.VotoBusiness;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,15 +23,15 @@ import io.swagger.annotations.ApiResponses;
 
 @Api
 @RestController
-@RequestMapping("voto")
+@RequestMapping("voto/v1")
 public class VotoController {
 
-	private final VotoService votoService;
+	private final VotoBusiness votoBusiness;
 	private final VotoConverter votoConverter;
 
-	private VotoController(VotoService votoService, VotoConverter votoConverter) {
+	private VotoController(VotoBusiness votoBusiness, VotoConverter votoConverter) {
 		super();
-		this.votoService = votoService;
+		this.votoBusiness = votoBusiness;
 		this.votoConverter = votoConverter;
 	}
 
@@ -39,7 +40,7 @@ public class VotoController {
 	@ApiResponses({
 			@ApiResponse(code = 200, message = "Votos carregados com sucesso", response = VotoOutput.class, responseContainer = "List") })
 	public List<VotoOutput> listarTodosVotos() {
-		return votoConverter.arrayEntitytoArrayDTOOutput(votoService.listarVotos());
+		return votoConverter.arrayEntitytoArrayDTOOutput(votoBusiness.listarVotos());
 	}
 
 	@ApiOperation(value = "Carregar um voto baseada no identificador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,7 +49,7 @@ public class VotoController {
 	@GetMapping("/{id}")
 	public VotoOutput carregarVoto(
 			@ApiParam(value = "Integer", name = "id", required = true) @PathVariable("id") Integer id) {
-		return votoConverter.entityToDTOOutput(votoService.carregarVoto(id));
+		return votoConverter.entityToDTOOutput(votoBusiness.carregarVoto(id));
 	}
 
 	@ApiOperation(value = "Cadastrar novo voto", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -57,6 +58,6 @@ public class VotoController {
 	public VotoOutput cadastrarVoto(
 			@ApiParam(value = "VotoInput", name = "votoInput", required = true) @RequestBody VotoInput votoInput)
 			throws Exception {
-		return votoConverter.entityToDTOOutput(votoService.cadastrarVoto(votoConverter.dtoInputToEntity(votoInput)));
+		return votoConverter.entityToDTOOutput(votoBusiness.cadastrarVoto(votoConverter.dtoInputToEntity(votoInput)));
 	}
 }

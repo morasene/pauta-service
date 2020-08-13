@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.pauta.entity.Pauta;
+import br.com.pauta.exception.ResourceNotFoundException;
 import br.com.pauta.repository.PautaRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,12 +33,11 @@ public class PautaServiceTests {
 	@Mock
 	private Pauta pautaMock;
 
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void validarCarregarAssociadoID() {
 		Integer id = 1;
-		when(pautaRepository.findById(id)).thenReturn(null);
-		Optional<Pauta> pauta = pautaService.carregarPauta(id);
-		assertNull(pauta);
+		when(pautaRepository.findById(id)).thenThrow(new ResourceNotFoundException("a"));
+		Pauta pauta = pautaService.carregarPauta(id);
 	}
 
 	@Test

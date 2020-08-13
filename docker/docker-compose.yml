@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.1
@@ -19,34 +19,25 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-  
-  mongo-express:
-    image: mongo-express
-    ports:
-      - 8081:8081
+
+  #PostgreSQL
+  database-postgres:
+    image: postgres:12.1
+    container_name: postgres-db
     environment:
-      ME_CONFIG_BASICAUTH_USERNAME: testecompasso
-      ME_CONFIG_BASICAUTH_PASSWORD: compasso123
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: compasso123
-    links:
-      - mongo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=compasso
+    ports:
+      - 15432:5432
     networks:
-      - mongo-compose-network
-  mongo:
-    image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin 
-      MONGO_INITDB_ROOT_PASSWORD: compasso123
-    ports:
-      - "27017:27017"
+      - rede-network
     volumes:
-      - "mongodbdata:/data"
-    networks:
-      - mongo-compose-network
+      - postgres-volume:/var/lib/postgresql/data
+    restart: always
+  
 volumes:
-  mongodbdata:
+  postgres-volume:
 networks:
-  mongo-compose-network:
+  rede-network:
     driver: bridge

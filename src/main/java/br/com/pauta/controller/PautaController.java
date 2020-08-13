@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Api
 @RestController
-@RequestMapping("pauta")
+@RequestMapping("pauta/v1")
 public class PautaController {
 
 	private final PautaService pautaService;

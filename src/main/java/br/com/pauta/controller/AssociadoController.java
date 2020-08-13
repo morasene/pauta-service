@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Api
 @RestController
-@RequestMapping("associado")
+@RequestMapping("associado/v1")
 public class AssociadoController {
 
 	private final AssociadoService associadoService;

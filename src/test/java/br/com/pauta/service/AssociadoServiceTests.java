@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.pauta.entity.Associado;
+import br.com.pauta.exception.ResourceNotFoundException;
 import br.com.pauta.repository.AssociadoRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,25 +35,24 @@ public class AssociadoServiceTests {
 	@Test
 	public void validarCarregarAssociadoCpf() {
 		String cpf = "12345678909";
-		when(associadoRepository.findByCpf(cpf)).thenReturn(associadoMock);
+		when(associadoRepository.findByCpf(cpf)).thenReturn(Optional.of(associadoMock));
 		Associado associado = associadoService.carregarAssociado(cpf);
 		assertEquals(associado, associadoMock);
 	}
 
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void validarExisteCarregarAssociadoID() {
 		Integer id = 1;
-		when(associadoRepository.findById(id)).thenReturn(Optional.of(associadoMock));
-		Optional<Associado> associado = associadoService.carregarAssociado(id);
-		assertTrue(associado.isPresent());
+		when(associadoRepository.findById(id)).thenThrow(new ResourceNotFoundException(""));
+		Associado associado = associadoService.carregarAssociado(id);
 	}
 	
 	@Test
 	public void validarCarregarAssociadoID() {
 		Integer id = 1;
 		when(associadoRepository.findById(id)).thenReturn(Optional.of(associadoMock));
-		Optional<Associado> associado = associadoService.carregarAssociado(id);
-		assertEquals(associado.get(), associadoMock);
+		Associado associado = associadoService.carregarAssociado(id);
+		assertEquals(associado, associadoMock);
 	}
 	
 	@Test
