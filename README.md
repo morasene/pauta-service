@@ -4,11 +4,11 @@ Projeto de Controle de Pautas
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=morasene_pauta-service&metric=alert_status)](https://sonarcloud.io/dashboard?id=morasene_pauta-service)
 
 ### Instalação Banco de Dados
-Para execução deste projeto foi utilizado o banco de dados mysql. 
+Para execução deste projeto foi utilizado o banco de dados postgre*. 
 
 Você pode encontrar o instalador nestes links:
-- https://www.mysql.com/downloads/
-- http://www.wampserver.com/en/
+- https://www.postgresql.org/download/
+* Dentro do projeto existe um docker com o banco configurado. /docker/executar_docker.bat 
 
 ### Criação do database
 Para o melhor andamento do projeto será necessário criar o banco de dados.
