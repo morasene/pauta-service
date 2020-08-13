@@ -79,7 +79,6 @@ public class VotoServiceTests {
 		Associado associado = new Associado();
 		associado.setIdAssociado(idAssociado);
 		votoMock.setAssociado(associado);
-//		when(votoRepository.findBySessaoIdSessao(idSessao)).thenReturn(Collections.singletonList(votoMock));
 		try {
 			votoService.cadastrarVoto(voto);			
 		} catch(BusinessException e) {			
@@ -103,9 +102,6 @@ public class VotoServiceTests {
 		sessao.setIdSessao(idSessao);
 		sessao.setDataFim(LocalDateTime.now().minusMinutes(1));
 		
-		//when(votoRepository.findBySessaoIdSessao(idSessao)).thenReturn(Collections.singletonList(votoMock));
-		//when(associadoService.carregarAssociado(idAssociado)).thenReturn(new Associado());
-		//when(sessaoService.carregarSessao(idSessao)).thenReturn(sessao);
 		try {
 			votoService.cadastrarVoto(voto);			
 		} catch(BusinessException e) {			
@@ -133,9 +129,6 @@ public class VotoServiceTests {
 		sessao.setPauta(pauta);
 		sessao.setDataFim(LocalDateTime.now().plusMinutes(10));
 		
-		//when(votoRepository.findBySessaoIdSessao(idSessao)).thenReturn(Collections.singletonList(votoMock));
-		//when(associadoService.carregarAssociado(idAssociado)).thenReturn(new Associado());
-		//when(sessaoService.carregarSessao(idSessao)).thenReturn(sessao);
 		when(votoRepository.save(voto)).thenReturn(voto);
 		
 		Voto votoNovo = votoService.cadastrarVoto(voto);

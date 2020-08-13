@@ -16,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -218,10 +217,6 @@ public class VotoBusinessTests {
 		when(votoService.listarVotosPorSessao(idVoto)).thenReturn(Collections.emptyList());
 		List<Voto> votos = votoBusiness.listarVotosPorSessao(idVoto);
 		assertTrue(votos.size() == 0);
-	}
-
-	private Cache<String, UserDTO> userCache() {
-		return Caffeine.newBuilder().expireAfterWrite(1, TimeUnit.HOURS).maximumSize(1).build();
 	}
 
 	private Cache<Integer, Associado> associadoCache() {

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,20 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(ConstraintViolationException.class)
+	public final ResponseEntity<ErrorResponse> handleNoSuchElementException(ConstraintViolationException ex, WebRequest request) {
+		ErrorResponse error = new ErrorResponse(BAD_REQUEST, Collections.singletonList(tratarMensagem(ex)));
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	private String tratarMensagem(ConstraintViolationException ex) {
+		String message = ex.getSQLException().getMessage();
+		if (message.contains("cpf") && message.contains("already exists")) {
+			message = "CPF ja cadastrado para outro associado.";
+		}
+		return message;
+	}
+	
 	@Override
 	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ErrorResponse error = new ErrorResponse(BAD_REQUEST, Collections.singletonList(ex.getMostSpecificCause().getMessage()));
