@@ -59,3 +59,9 @@ A documentação do projeto encontra-se em:
 ```bash
 http://localhost:8080/swagger-ui.html#/
 ```
+
+### Futuras Melhorias
+Como futuras melhorias do projeto:
+- Uso de mensageria utilizando Kafka
+- Teste de integração utilizando MockMVC
+- Maior cobertura dos testes
